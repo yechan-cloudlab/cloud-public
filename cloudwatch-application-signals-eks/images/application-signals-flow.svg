@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260">
+  <rect width="960" height="260" rx="24" fill="#0f172a"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <rect x="40" y="70" width="180" height="120" rx="18" fill="#1e293b" stroke="#60a5fa"/>
+    <text x="130" y="122" fill="#fff" font-size="22">EKS Workload</text>
+    <rect x="280" y="70" width="180" height="120" rx="18" fill="#1e293b" stroke="#facc15"/>
+    <text x="370" y="112" fill="#fff" font-size="20">Auto</text>
+    <text x="370" y="140" fill="#fff" font-size="20">Instrumentation</text>
+    <rect x="520" y="70" width="180" height="120" rx="18" fill="#1e293b" stroke="#34d399"/>
+    <text x="610" y="112" fill="#fff" font-size="20">CloudWatch</text>
+    <text x="610" y="140" fill="#fff" font-size="20">Agent</text>
+    <rect x="760" y="70" width="160" height="120" rx="18" fill="#1e293b" stroke="#fb7185"/>
+    <text x="840" y="112" fill="#fff" font-size="20">Application</text>
+    <text x="840" y="140" fill="#fff" font-size="20">Signals</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="4" fill="none">
+    <path d="M220 130 H280"/>
+    <path d="M460 130 H520"/>
+    <path d="M700 130 H760"/>
+  </g>
+</svg>
