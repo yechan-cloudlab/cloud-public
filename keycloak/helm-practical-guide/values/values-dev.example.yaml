@@ -1,0 +1,24 @@
+# Development example only. Do not use this file unchanged in production.
+
+auth:
+  adminUser: "{{KEYCLOAK_ADMIN_USER}}"
+  adminPassword: "{{KEYCLOAK_ADMIN_PASSWORD}}"
+
+production: false
+
+postgresql:
+  enabled: true
+  auth:
+    username: "{{DEV_DB_USER}}"
+    password: "{{DEV_DB_PASSWORD}}"
+    database: "{{DEV_DB_NAME}}"
+
+ingress:
+  enabled: false
+
+replicaCount: 1
+
+resourcesPreset: "small"
+
+metrics:
+  enabled: true
