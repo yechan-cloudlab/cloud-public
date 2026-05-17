@@ -1,0 +1,70 @@
+# Default wrapper values for this guide.
+# Use one of the files under values/ for a concrete example.
+
+keycloak:
+  image:
+    registry: docker.io
+    repository: bitnami/keycloak
+    tag: 26.3.3-debian-12-r0
+
+  auth:
+    adminUser: "{{KEYCLOAK_ADMIN_USER}}"
+    existingSecret: "{{KEYCLOAK_ADMIN_SECRET_NAME}}"
+    passwordSecretKey: "admin-password"
+
+  production: true
+  proxyHeaders: "xforwarded"
+  hostnameStrict: true
+  httpEnabled: true
+
+  postgresql:
+    enabled: false
+
+  externalDatabase:
+    host: "{{RDS_HOST}}"
+    port: 5432
+    user: "{{KEYCLOAK_DB_USER}}"
+    database: "{{KEYCLOAK_DB_NAME}}"
+    schema: "public"
+    existingSecret: "{{KEYCLOAK_DB_SECRET_NAME}}"
+    existingSecretUserKey: "db-user"
+    existingSecretPasswordKey: "db-password"
+    extraParams: "sslmode=require"
+
+  tls:
+    enabled: false
+
+  replicaCount: 2
+
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+  livenessProbe:
+    enabled: true
+  readinessProbe:
+    enabled: true
+  startupProbe:
+    enabled: true
+
+  ingress:
+    enabled: true
+    ingressClassName: "{{INGRESS_CLASS_NAME}}"
+    hostname: "{{KEYCLOAK_DOMAIN}}"
+    path: "/"
+    tls: true
+    extraTls:
+      - hosts:
+          - "{{KEYCLOAK_DOMAIN}}"
+        secretName: "{{TLS_SECRET_NAME}}"
+
+  metrics:
+    enabled: true
+
+  keycloakConfigCli:
+    enabled: true
+    existingConfigmap: "{{REALM_CONFIGMAP_NAME}}"
