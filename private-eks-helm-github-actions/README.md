@@ -1,6 +1,6 @@
 # Private EKS Helm deployment with GitHub Actions
 
-This example shows how to deploy a small Helm chart to a private Amazon EKS cluster by running the workflow on a self-hosted runner inside the VPC.
+This example accompanies the [tistory-cloud blog](https://tistory-cloud.tistory.com/) and shows how to deploy a small Helm chart to a private Amazon EKS cluster by running the workflow on a self-hosted runner inside the VPC.
 
 ## What this repository demonstrates
 
@@ -29,4 +29,6 @@ This example shows how to deploy a small Helm chart to a private Amazon EKS clus
 
 ## Related blog post
 
-- GitHub Actions로 Private EKS에 Helm 배포 자동화하는 방법: self-hosted runner 구성부터 배포까지
+- [tistory-cloud blog](https://tistory-cloud.tistory.com/)
+- Related article: `GitHub Actions로 Private EKS에 Helm 배포 자동화하는 방법: self-hosted runner 구성부터 배포까지`
+- Add the direct article URL here after the post is published so readers can move from the example code to the full guide in one click.
