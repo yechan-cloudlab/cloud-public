@@ -1,0 +1,47 @@
+name: Deploy to Private EKS
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, x64, private-eks]
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ap-northeast-2
+
+      - name: Update kubeconfig
+        run: aws eks update-kubeconfig --name "${{ secrets.EKS_CLUSTER_NAME }}"
+
+      - name: Validate chart
+        run: |
+          helm lint ./chart -f "values/values-${{ inputs.environment }}.yaml"
+          helm template my-app ./chart -f "values/values-${{ inputs.environment }}.yaml"
+
+      - name: Deploy with Helm
+        run: |
+          helm upgrade --install my-app ./chart \
+            --namespace my-app \
+            --create-namespace \
+            -f "values/values-${{ inputs.environment }}.yaml" \
+            --wait
