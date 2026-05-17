@@ -1,0 +1,26 @@
+{
+  "realm": "demo",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "demo-app",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "{{APP_REDIRECT_URI}}"
+      ],
+      "webOrigins": [
+        "{{APP_WEB_ORIGIN}}"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "demo-user",
+      "enabled": true,
+      "emailVerified": true
+    }
+  ]
+}
