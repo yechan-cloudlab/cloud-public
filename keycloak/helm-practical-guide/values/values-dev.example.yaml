@@ -1,24 +1,31 @@
-# Development example only. Do not use this file unchanged in production.
+# Development example for this wrapper chart.
+# Do not use this file unchanged in production.
 
-auth:
-  adminUser: "{{KEYCLOAK_ADMIN_USER}}"
-  adminPassword: "{{KEYCLOAK_ADMIN_PASSWORD}}"
+keycloak:
+  image:
+    registry: docker.io
+    repository: bitnami/keycloak
+    tag: 26.3.3-debian-12-r0
 
-production: false
-
-postgresql:
-  enabled: true
   auth:
-    username: "{{DEV_DB_USER}}"
-    password: "{{DEV_DB_PASSWORD}}"
-    database: "{{DEV_DB_NAME}}"
+    adminUser: "{{KEYCLOAK_ADMIN_USER}}"
+    adminPassword: "{{KEYCLOAK_ADMIN_PASSWORD}}"
 
-ingress:
-  enabled: false
+  production: false
 
-replicaCount: 1
+  postgresql:
+    enabled: true
+    auth:
+      username: "{{DEV_DB_USER}}"
+      password: "{{DEV_DB_PASSWORD}}"
+      database: "{{DEV_DB_NAME}}"
 
-resourcesPreset: "small"
+  ingress:
+    enabled: false
 
-metrics:
-  enabled: true
+  replicaCount: 1
+
+  resourcesPreset: "small"
+
+  metrics:
+    enabled: true
