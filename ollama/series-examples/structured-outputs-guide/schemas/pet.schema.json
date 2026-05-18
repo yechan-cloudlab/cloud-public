@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "pets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "animal": { "type": "string" },
+          "age": { "type": "integer" }
+        },
+        "required": ["name", "animal", "age"]
+      }
+    }
+  },
+  "required": ["pets"]
+}
