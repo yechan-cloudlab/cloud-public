@@ -1,0 +1,4 @@
+moneropool.example
+coinminer.example
+bad-domain.example
+exfil.example
