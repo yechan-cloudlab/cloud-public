@@ -1,0 +1,14 @@
+{
+  "name": "ollama-structured-outputs-guide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "extract:pet": "node javascript/extract_pet_info.js",
+    "classify:ticket": "node javascript/classify_support_ticket.js"
+  },
+  "dependencies": {
+    "ollama": "latest",
+    "zod": "latest",
+    "zod-to-json-schema": "latest"
+  }
+}
