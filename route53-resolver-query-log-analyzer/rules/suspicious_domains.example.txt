@@ -1,0 +1,4 @@
+# One exact-match domain per line
+moneropool.example
+bad-domain.example
+exfil.example
