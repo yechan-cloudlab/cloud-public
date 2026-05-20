@@ -1,0 +1,14 @@
+[
+  {
+    "id": "basic-difference",
+    "question": "What is the difference between Perplexity Sonar API and a general LLM API"
+  },
+  {
+    "id": "research-workflow",
+    "question": "How can a cloud engineer use Sonar API to research a new AWS service"
+  },
+  {
+    "id": "source-check",
+    "question": "What criteria should be used to evaluate source credibility in AI search results"
+  }
+]
