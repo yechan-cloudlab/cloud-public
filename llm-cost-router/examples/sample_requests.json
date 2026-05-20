@@ -1,0 +1,20 @@
+{
+  "requests": [
+    {
+      "id": "simple-summary",
+      "prompt": "요약해줘: LLM 라우터는 쉬운 요청을 로컬 모델로 보내고 어려운 요청을 Claude로 보내 비용을 줄이는 구조입니다."
+    },
+    {
+      "id": "simple-classification",
+      "prompt": "다음 문장을 billing, technical, account 중 하나로 분류해줘: 결제가 두 번 되었어요."
+    },
+    {
+      "id": "code-generation",
+      "prompt": "Python으로 API Gateway 요청을 받아 Bedrock Claude를 호출하는 Lambda 코드를 구현해줘."
+    },
+    {
+      "id": "architecture-review",
+      "prompt": "ECS에서 Ollama 서버를 운영하고 API Gateway Lambda Router로 Bedrock Claude와 분기하는 아키텍처를 비교 분석해줘. 장애 지점과 비용 관점도 포함해줘."
+    }
+  ]
+}

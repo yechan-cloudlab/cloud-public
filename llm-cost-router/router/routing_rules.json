@@ -1,0 +1,64 @@
+{
+  "default_provider": "bedrock_claude",
+  "ollama": {
+    "model": "llama3.1:8b",
+    "base_url": "http://localhost:11434",
+    "rules": [
+      {
+        "name": "simple_summary",
+        "description": "Short summarization, rewriting, or formatting tasks that do not require external knowledge or complex reasoning.",
+        "keywords": [
+          "요약",
+          "정리",
+          "문장 다듬기",
+          "톤 변경",
+          "rewrite",
+          "summarize",
+          "format"
+        ],
+        "max_prompt_chars": 2500
+      },
+      {
+        "name": "simple_classification",
+        "description": "Simple label extraction or classification tasks.",
+        "keywords": [
+          "분류",
+          "카테고리",
+          "라벨",
+          "classify",
+          "tag"
+        ],
+        "max_prompt_chars": 1800
+      }
+    ]
+  },
+  "bedrock_claude": {
+    "model": "anthropic.claude-3-5-sonnet-20240620-v1:0",
+    "rules": [
+      {
+        "name": "code_generation",
+        "description": "Code generation, debugging, security review, infrastructure design, or multi-step implementation tasks.",
+        "keywords": [
+          "코드",
+          "구현",
+          "디버깅",
+          "보안",
+          "아키텍처",
+          "terraform",
+          "python",
+          "typescript",
+          "lambda",
+          "bedrock",
+          "debug",
+          "implement",
+          "refactor"
+        ]
+      },
+      {
+        "name": "complex_reasoning",
+        "description": "Long context, ambiguous requirements, or tasks requiring careful tradeoff analysis.",
+        "min_prompt_chars": 2501
+      }
+    ]
+  }
+}

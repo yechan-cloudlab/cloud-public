@@ -1,0 +1,6 @@
+[
+  {"id": "simple-summary", "expected_route": "ollama", "expected_rule": "simple_summary"},
+  {"id": "simple-classification", "expected_route": "ollama", "expected_rule": "simple_classification"},
+  {"id": "code-generation", "expected_route": "bedrock_claude", "expected_rule": "code_generation"},
+  {"id": "architecture-review", "expected_route": "bedrock_claude", "expected_rule": "complex_reasoning"}
+]
