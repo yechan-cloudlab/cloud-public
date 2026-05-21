@@ -8,7 +8,7 @@ Perplexity Sonar API examples for building web-grounded AI answers with citation
 
 ## Related article
 
-- Coming soon
+- [Perplexity Sonar](https://tistory-cloud.tistory.com/entry/Perplexity-Sonar-API-%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%9B%B9-%EA%B2%80%EC%83%89%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%9C-AI-%EB%8B%B5%EB%B3%80-API-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 
 ---
 
