@@ -1,0 +1,35 @@
+{
+  "name": "keycloak-mcp-readonly-server",
+  "version": "0.1.0",
+  "description": "Readonly MCP server sample for inspecting Keycloak configuration",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "node scripts/validate-repo.mjs"
+  },
+  "keywords": [
+    "keycloak",
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "readonly",
+    "identity-access-management"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
