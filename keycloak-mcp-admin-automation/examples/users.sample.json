@@ -1,0 +1,4 @@
+[
+  { "username": "marketing001", "email": "marketing001@example.com", "firstName": "Marketing", "lastName": "User001" },
+  { "username": "marketing002", "email": "marketing002@example.com", "firstName": "Marketing", "lastName": "User002" }
+]
