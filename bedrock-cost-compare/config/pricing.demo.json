@@ -1,0 +1,23 @@
+{
+  "currency": "USD",
+  "unit": "per_1m_tokens",
+  "demo_only": true,
+  "note": "Fictional demo prices for local calculation only. Do not use these values for AWS billing decisions.",
+  "models": {
+    "claude-haiku": {
+      "model_id": "demo-claude-haiku",
+      "input_per_1m": 1.0,
+      "output_per_1m": 5.0
+    },
+    "claude-sonnet": {
+      "model_id": "demo-claude-sonnet",
+      "input_per_1m": 3.0,
+      "output_per_1m": 15.0
+    },
+    "claude-opus": {
+      "model_id": "demo-claude-opus",
+      "input_per_1m": 15.0,
+      "output_per_1m": 75.0
+    }
+  }
+}

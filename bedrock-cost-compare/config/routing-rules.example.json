@@ -1,0 +1,40 @@
+{
+  "default_model": "claude-sonnet",
+  "rules": [
+    {
+      "category": "summarize",
+      "model": "claude-haiku",
+      "reason": "Short summarization is usually latency and cost sensitive."
+    },
+    {
+      "category": "classify",
+      "model": "claude-haiku",
+      "reason": "Classification is usually simple and repetitive."
+    },
+    {
+      "category": "translate",
+      "model": "claude-haiku",
+      "reason": "Translation can often be routed to a lower cost model first."
+    },
+    {
+      "category": "code_generate",
+      "model": "claude-sonnet",
+      "reason": "Code generation usually needs stronger instruction following."
+    },
+    {
+      "category": "code_review",
+      "model": "claude-sonnet",
+      "reason": "Code review needs balanced reasoning and cost."
+    },
+    {
+      "category": "security_audit",
+      "model": "claude-sonnet",
+      "reason": "Security review should not default to the cheapest model."
+    },
+    {
+      "category": "deep_reasoning",
+      "model": "claude-opus",
+      "reason": "Use the strongest model only for high value complex reasoning."
+    }
+  ]
+}

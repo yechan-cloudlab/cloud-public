@@ -1,0 +1,22 @@
+{
+  "currency": "USD",
+  "unit": "per_1m_tokens",
+  "note": "Template for real pricing. Replace every value with current Amazon Bedrock pricing for your model version and region.",
+  "models": {
+    "claude-haiku": {
+      "model_id": "replace-with-current-bedrock-model-id",
+      "input_per_1m": 0.0,
+      "output_per_1m": 0.0
+    },
+    "claude-sonnet": {
+      "model_id": "replace-with-current-bedrock-model-id",
+      "input_per_1m": 0.0,
+      "output_per_1m": 0.0
+    },
+    "claude-opus": {
+      "model_id": "replace-with-current-bedrock-model-id",
+      "input_per_1m": 0.0,
+      "output_per_1m": 0.0
+    }
+  }
+}

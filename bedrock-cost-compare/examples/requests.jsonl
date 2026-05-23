@@ -1,0 +1,6 @@
+{"id":"req-001","category":"summarize","input_tokens":3200,"output_tokens":500}
+{"id":"req-002","category":"classify","input_tokens":900,"output_tokens":80}
+{"id":"req-003","category":"code_generate","input_tokens":4200,"output_tokens":1800}
+{"id":"req-004","category":"code_review","input_tokens":6100,"output_tokens":1200}
+{"id":"req-005","category":"deep_reasoning","input_tokens":8200,"output_tokens":2500}
+{"id":"req-006","category":"security_audit","input_tokens":7000,"output_tokens":1600}

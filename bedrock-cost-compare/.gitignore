@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+config/pricing.local.json
+.pytest_cache/
+.DS_Store
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate*

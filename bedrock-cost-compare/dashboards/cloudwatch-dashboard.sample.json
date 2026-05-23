@@ -1,0 +1,50 @@
+{
+  "widgets": [
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "# Bedrock Claude Cost Dashboard\nSample dashboard definition. Replace metrics with your actual namespace and dimensions."
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["Custom/BedrockRouter", "InputTokens", "Model", "claude-haiku"],
+          [".", "InputTokens", "Model", "claude-sonnet"],
+          [".", "InputTokens", "Model", "claude-opus"]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "region": "us-east-1",
+        "title": "Input tokens by model"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "metrics": [
+          ["Custom/BedrockRouter", "OutputTokens", "Model", "claude-haiku"],
+          [".", "OutputTokens", "Model", "claude-sonnet"],
+          [".", "OutputTokens", "Model", "claude-opus"]
+        ],
+        "period": 300,
+        "stat": "Sum",
+        "region": "us-east-1",
+        "title": "Output tokens by model"
+      }
+    }
+  ]
+}
