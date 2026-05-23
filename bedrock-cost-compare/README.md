@@ -1,76 +1,64 @@
-# bedrock-cost-compare
+# Bedrock Cost Compare
 
-> Example repository for comparing Amazon Bedrock Claude model costs and designing a simple request routing strategy.
+Amazon Bedrock Claude 모델 비용을 비교하고 간단한 요청 라우팅 전략을 설계하는 예제입니다.
 
-This is a **sample repository**. It is not a production-ready Bedrock cost platform. The goal is to show how Claude Haiku, Sonnet, and Opus-style model tiers can be selected by request type so teams can understand and control token cost.
+> 이 저장소는 학습용 샘플입니다. 프로덕션용 Bedrock 비용 플랫폼이 아닙니다. Claude Haiku, Sonnet, Opus 스타일의 모델 티어를 요청 유형에 따라 선택해 토큰 비용을 이해하고 제어하는 방법을 보여줍니다.
 
-## Why this example exists
+---
 
-A common Bedrock cost problem is sending every request to the strongest model. Simple summarization, classification, and translation requests usually do not need the same model tier as complex reasoning or high-risk code review.
+## 📎 관련 아티클
 
-This example shows a small workflow:
+- Coming soon
 
-1. Classify each request into a category such as `summarize`, `classify`, `code_generate`, or `deep_reasoning`.
-2. Select a model tier from routing rules.
-3. Estimate cost by separating input tokens and output tokens.
-4. Compare a fixed-model strategy with a routed strategy.
+---
 
-## What is included
+## ✅ 이 예제가 보여주는 것
 
-- Cost calculator for Bedrock Claude-style model tiers
-- Request routing rules by task category
-- Fixed-model vs routed-model comparison script
-- CloudWatch Dashboard sample
-- Terraform sample for a dashboard and billing alarm
-- Model selection guide
-- Operations checklist
-- Unit tests using Python standard library `unittest`
+- 요청을 `summarize`, `classify`, `code_generate`, `deep_reasoning` 등 카테고리로 분류하는 방법
+- 라우팅 규칙에 따라 모델 티어를 선택하는 방법
+- 입력/출력 토큰을 분리해 비용을 추정하는 방법
+- 고정 모델 전략과 라우팅 전략의 비용 비교
+- CloudWatch Dashboard 샘플 및 Terraform 예제
 
-## Pricing policy
+## ❌ 이 예제가 하지 않는 것
 
-AWS Bedrock pricing can change by model, version, region, and billing mode. This repository does not hard-code real production prices.
+- 실제 AWS Bedrock 프로덕션 가격을 하드코딩하지 않습니다.
+- 프로덕션용 인증, 권한, 속도 제한을 포함하지 않습니다.
 
-- `config/pricing.template.json`: template for real pricing. Fill it with current AWS pricing before using it.
-- `config/pricing.demo.json`: fictional demo pricing for local execution only. Do not use it for billing decisions.
+> **가격 정책**: `config/pricing.template.json`에 실제 AWS 가격을 채워 사용하세요. `config/pricing.demo.json`은 로컬 실행 전용 가상 가격으로, 실제 과금 결정에 사용하지 마세요.  
+> 최신 가격은 [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)에서 확인하세요.
 
-Always verify current pricing and model availability from official AWS documentation:
+---
 
-- AWS Bedrock pricing: https://aws.amazon.com/bedrock/pricing/
-- Amazon Bedrock User Guide: https://docs.aws.amazon.com/bedrock/
-- Anthropic models in Amazon Bedrock: https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards-anthropic.html
-
-## Repository structure
+## 📁 폴더 구조
 
 ```text
-bedrock-cost-compare/
-  config/
-    pricing.demo.json
-    pricing.template.json
-    routing-rules.example.json
-  dashboards/
-    cloudwatch-dashboard.sample.json
-  docs/
-    model-selection.md
-    operations-checklist.md
-  examples/
-    requests.jsonl
-  src/
-    bedrock_client.py
-    compare_strategies.py
-    cost_calculator.py
-    router.py
-  terraform/
-    main.tf
-    outputs.tf
-    variables.tf
-  tests/
-    test_cost_calculator.py
-  README.md
+config/             가격 템플릿 및 라우팅 규칙
+dashboards/         CloudWatch Dashboard 샘플
+docs/               모델 선택 가이드, 운영 체크리스트
+examples/           샘플 요청 데이터
+src/                비용 계산기, 라우터, Bedrock 클라이언트
+terraform/          CloudWatch Dashboard 및 빌링 알람 샘플
+tests/              단위 테스트
 ```
 
-## Quick start
+**예제 라우팅 정책**
 
-### 1. Create a virtual environment
+| 요청 카테고리 | 권장 모델 티어 | 이유 |
+| --- | --- | --- |
+| `summarize` | Claude Haiku | 짧은 요약은 비용·지연 민감도가 높음 |
+| `classify` | Claude Haiku | 분류는 반복적이고 단순한 경우가 많음 |
+| `translate` | Claude Haiku | 번역은 저비용 모델로 시작 가능 |
+| `code_generate` | Claude Sonnet | 코드 생성은 강한 명령 수행 능력 필요 |
+| `code_review` | Claude Sonnet | 코드 리뷰는 추론과 비용의 균형 필요 |
+| `security_audit` | Claude Sonnet or Opus | 보안 작업은 강한 검토와 에스컬레이션 필요 |
+| `deep_reasoning` | Claude Opus | 고가치 복잡 추론에만 최강 모델 사용 |
+
+---
+
+## 🚀 빠른 시작
+
+**1. 가상 환경 생성 및 의존성 설치**
 
 ```bash
 python -m venv .venv
@@ -86,45 +74,31 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### 2. Run the demo cost calculator
+**2. 데모 비용 계산기 실행**
 
 ```bash
 python src/cost_calculator.py --pricing config/pricing.demo.json --requests examples/requests.jsonl
 ```
 
-### 3. Run the router demo
+**3. 라우터 데모 실행**
 
 ```bash
 python src/router.py --rules config/routing-rules.example.json --requests examples/requests.jsonl
 ```
 
-### 4. Compare fixed model vs routing strategy
+**4. 고정 모델 vs 라우팅 전략 비교**
 
 ```bash
 python src/compare_strategies.py --pricing config/pricing.demo.json --rules config/routing-rules.example.json --requests examples/requests.jsonl --baseline claude-opus
 ```
 
-## Example routing policy
-
-| Request category | Suggested model tier | Reason |
-| --- | --- | --- |
-| `summarize` | Claude Haiku | Short summarization is usually cost and latency sensitive. |
-| `classify` | Claude Haiku | Classification is often repetitive and simple. |
-| `translate` | Claude Haiku | Translation can often start with a lower-cost model. |
-| `code_generate` | Claude Sonnet | Code generation needs stronger instruction following. |
-| `code_review` | Claude Sonnet | Code review needs balanced reasoning and cost. |
-| `security_audit` | Claude Sonnet or Opus | Security tasks need stronger review and sometimes escalation. |
-| `deep_reasoning` | Claude Opus | Use the strongest model only for high-value complex reasoning. |
-
-## Run tests
+**5. 테스트 실행**
 
 ```bash
 python -m unittest discover -s tests
 ```
 
-## Terraform sample
-
-Terraform files in `terraform/` create a sample CloudWatch Dashboard and a simple estimated billing alarm.
+**6. Terraform 샘플**
 
 ```bash
 cd terraform
@@ -132,24 +106,28 @@ terraform init
 terraform plan
 ```
 
-Review the Terraform files before applying them to any AWS account.
+---
 
-## Production checklist
+## ⚠️ 사용 전 확인
 
-Before using this idea in production:
+- 현재 AWS Bedrock 가격을 반드시 확인하세요.
+- 대상 리전에서 모델 사용 가능 여부를 확인하세요.
+- 모든 요청에 `max_tokens`를 설정하세요.
+- 요청 카테고리, 선택 모델, 입력/출력 토큰을 로깅하세요.
+- 민감한 프롬프트와 고객 데이터를 마스킹하세요.
+- 롤아웃 전 예산 알람을 설정하세요.
+- dry-run 라우팅으로 시작하세요.
+- 단일 기본 모델로 롤백할 경로를 유지하세요.
 
-- Check current AWS Bedrock pricing.
-- Confirm model availability in your target region.
-- Set `max_tokens` for every request.
-- Log request category, selected model, input tokens, and output tokens.
-- Mask sensitive prompts and customer data.
-- Add budget alarms before rollout.
-- Start with dry-run routing.
-- Keep a rollback path to a single default model.
+---
 
-## Related blog article
+## 📚 참고 문서
 
-Coming soon.
+- [AWS Bedrock pricing](https://aws.amazon.com/bedrock/pricing/)
+- [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/)
+- [Anthropic models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards-anthropic.html)
+
+---
 
 ## License
 
