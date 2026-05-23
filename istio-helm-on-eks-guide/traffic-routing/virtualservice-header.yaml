@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin-header
+  namespace: istio-sample
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - httpbin-gateway
+  http:
+    - match:
+        - headers:
+            x-user-type:
+              exact: beta
+      route:
+        - destination:
+            host: httpbin
+            subset: v2
+            port:
+              number: 8000
+    - route:
+        - destination:
+            host: httpbin
+            subset: v1
+            port:
+              number: 8000

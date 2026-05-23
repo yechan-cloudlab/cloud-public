@@ -1,0 +1,3 @@
+# Sample values for istio/base.
+# The base chart installs Istio CRDs and cluster-scoped base resources.
+defaultRevision: default

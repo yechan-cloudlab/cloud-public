@@ -1,0 +1,5 @@
+# Placeholder values for a Prometheus installation.
+# In production, use your organization's monitoring stack and retention policy.
+server:
+  persistentVolume:
+    enabled: false

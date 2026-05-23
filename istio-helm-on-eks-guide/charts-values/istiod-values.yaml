@@ -1,0 +1,10 @@
+# Sample values for istio/istiod.
+# Tune resource requests, meshConfig, and tracing settings for your environment.
+pilot:
+  autoscaleEnabled: true
+  autoscaleMin: 1
+  autoscaleMax: 3
+
+meshConfig:
+  accessLogFile: /dev/stdout
+  enableTracing: true
