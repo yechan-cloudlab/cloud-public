@@ -18,10 +18,13 @@ CLUSTER_SCOPED_KINDS = {
     "ClusterRole",
     "ClusterRoleBinding",
     "CustomResourceDefinition",
+    "IngressClass",
+    "MutatingWebhookConfiguration",
     "Namespace",
     "Node",
     "PersistentVolume",
     "StorageClass",
+    "ValidatingWebhookConfiguration",
 }
 
 
