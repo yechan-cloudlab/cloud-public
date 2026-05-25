@@ -23,6 +23,10 @@ spec:
           securityContext:
             privileged: true
             allowPrivilegeEscalation: true
+            runAsUser: 0
+            capabilities:
+              add:
+                - SYS_ADMIN
           volumeMounts:
             - name: host-data
               mountPath: /host

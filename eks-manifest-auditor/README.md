@@ -2,7 +2,7 @@
 
 `eks-manifest-auditor` is a Python CLI that scans local Kubernetes/EKS YAML manifests and reports operational, security, and resource risks before anything is deployed.
 
-It does not connect to AWS, EKS, kubeconfig, or a live Kubernetes cluster. The v0.1 scope is intentionally limited to local static analysis so the tool can be developed, tested, and reviewed without cloud access.
+It does not connect to AWS, EKS, kubeconfig, or a live Kubernetes cluster. The v0.2 scope is intentionally limited to local static analysis so the tool can be developed, tested, and reviewed without cloud access.
 
 Related Article: [EKS Manifest 검사 자동화: Kubernetes YAML 보안·리소스 문제를 로컬에서 찾는 Python CLI 만들기](https://tistory-cloud.tistory.com/entry/EKS-Manifest-%EA%B2%80%EC%82%AC-%EC%9E%90%EB%8F%99%ED%99%94-Kubernetes-YAML-%EB%B3%B4%EC%95%88%C2%B7%EB%A6%AC%EC%86%8C%EC%8A%A4-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%EB%A1%9C%EC%BB%AC%EC%97%90%EC%84%9C-%EC%B0%BE%EB%8A%94-Python-CLI-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 
@@ -25,9 +25,12 @@ Finding these problems before CI/CD or production rollout gives platform teams a
 - Parses multi-document Kubernetes YAML files
 - Handles invalid YAML without stopping the whole scan
 - Detects workload, security, service, ingress, and IRSA issues
+- Detects missing readiness, liveness, and startup probes
+- Detects common container hardening gaps such as root user, seccomp, filesystem, and Linux capabilities
 - Prints Rich console tables with severity colors
 - Writes JSON reports
 - Writes Markdown reports
+- Supports CI-friendly failure thresholds with `--fail-on`
 - Keeps scanner, parser, checks, and reporters separated for future extension
 
 ## Checks
@@ -39,6 +42,12 @@ Finding these problems before CI/CD or production rollout gives platform teams a
 - Images using the `latest` tag or no explicit tag
 - `replicas` value of `1` or lower
 
+### Health Checks
+
+- Missing `readinessProbe`
+- Missing `livenessProbe`
+- Missing `startupProbe`
+
 ### Security Checks
 
 - `privileged: true`
@@ -46,6 +55,11 @@ Finding these problems before CI/CD or production rollout gives platform teams a
 - `default` namespace usage
 - `allowPrivilegeEscalation: true`
 - Missing `runAsNonRoot`
+- Missing `readOnlyRootFilesystem`
+- Dangerous Linux capabilities such as `SYS_ADMIN` and `NET_ADMIN`
+- Missing `capabilities.drop: ["ALL"]`
+- Missing `seccompProfile`
+- Explicit `runAsUser: 0`
 
 ### Service Checks
 
@@ -141,6 +155,18 @@ Write a Markdown report:
 eks-manifest-auditor scan ./examples --output markdown --file report.md
 ```
 
+Fail CI when HIGH findings exist:
+
+```bash
+eks-manifest-auditor scan ./examples --fail-on HIGH
+```
+
+Fail CI when MEDIUM or HIGH findings exist:
+
+```bash
+eks-manifest-auditor scan ./examples --fail-on MEDIUM
+```
+
 ## Console Output Example
 
 ```text
@@ -153,9 +179,9 @@ HIGH      SECURITY_HOST_PATH_VOLUME        Deployment/risky-api  default     Vol
 MEDIUM    SERVICE_LOAD_BALANCER            Service/risky-api     default     Service exposes a cloud LoadBalancer.
 
 Summary
-HIGH 4
-MEDIUM 9
-LOW 3
+HIGH 6
+MEDIUM 12
+LOW 4
 ```
 
 ## JSON Example
@@ -163,9 +189,9 @@ LOW 3
 ```json
 {
   "summary": {
-    "LOW": 3,
-    "MEDIUM": 9,
-    "HIGH": 4
+    "LOW": 4,
+    "MEDIUM": 12,
+    "HIGH": 6
   },
   "findings": [
     {
@@ -189,10 +215,10 @@ LOW 3
 
 ## Summary
 
-- Total findings: 16
-- HIGH: 4
-- MEDIUM: 9
-- LOW: 3
+- Total findings: 22
+- HIGH: 6
+- MEDIUM: 12
+- LOW: 4
 
 ## Findings Table
 
@@ -204,9 +230,9 @@ LOW 3
 
 | Severity | Count |
 |---|---:|
-| HIGH | 4 |
-| MEDIUM | 9 |
-| LOW | 3 |
+| HIGH | 6 |
+| MEDIUM | 12 |
+| LOW | 4 |
 
 ## Recommendations
 
@@ -253,7 +279,7 @@ eks-manifest-auditor/
 
 ## Safety Boundary
 
-The v0.1 implementation intentionally does not:
+The v0.2 implementation intentionally does not:
 
 - call AWS APIs
 - connect to EKS
