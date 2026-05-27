@@ -1,0 +1,72 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Amazon Bedrock token usage monitor with Lambda, CountTokens, DynamoDB, and CloudWatch Logs.
+
+Parameters:
+  TokenUsageTableName:
+    Type: String
+    Default: BedrockTokenUsage
+    Description: DynamoDB table name for token usage metadata records.
+  MaxInputTokens:
+    Type: Number
+    Default: 2000
+    Description: Maximum allowed estimated input tokens before blocking the Bedrock call.
+  DefaultModelId:
+    Type: String
+    Default: anthropic.claude-3-haiku-20240307-v1:0
+    Description: Default Amazon Bedrock model ID used when the request does not include model_id.
+  DefaultMaxOutputTokens:
+    Type: Number
+    Default: 512
+    Description: Default maximum output tokens for the Converse call.
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 30
+    MemorySize: 256
+    Architectures:
+      - x86_64
+
+Resources:
+  TokenUsageTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TokenUsageTableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: request_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: request_id
+          KeyType: HASH
+
+  BedrockTokenUsageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Description: Counts Amazon Bedrock input tokens, calls Converse, and records token usage metadata.
+      Environment:
+        Variables:
+          TOKEN_USAGE_TABLE: !Ref TokenUsageTableName
+          MAX_INPUT_TOKENS: !Ref MaxInputTokens
+          DEFAULT_MODEL_ID: !Ref DefaultModelId
+          DEFAULT_MAX_OUTPUT_TOKENS: !Ref DefaultMaxOutputTokens
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TokenUsageTableName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:CountTokens
+                - bedrock:InvokeModel
+              Resource: '*'
+
+Outputs:
+  FunctionName:
+    Description: Lambda function name. CloudWatch Logs are available at /aws/lambda/<function-name>.
+    Value: !Ref BedrockTokenUsageFunction
+  TokenUsageTableName:
+    Description: DynamoDB table name for token usage metadata.
+    Value: !Ref TokenUsageTable
