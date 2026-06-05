@@ -1,0 +1,12 @@
+# Minimal kube-prometheus-stack values for first installation tests.
+# Review all defaults before using this in a real environment.
+
+grafana:
+  enabled: true
+
+alertmanager:
+  enabled: true
+
+prometheus:
+  prometheusSpec:
+    retention: 7d
