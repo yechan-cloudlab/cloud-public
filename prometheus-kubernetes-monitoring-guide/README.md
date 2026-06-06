@@ -7,21 +7,22 @@ The examples are designed for learning and review. They are not production-ready
 
 ## Blog Series Mapping
 
-| Part | Blog Topic | Directory | Example Files |
-|---:|---|---|---|
-| 2 | Prometheus Helm install with kube-prometheus-stack | `02-helm-install/` and legacy `helm/` | `install-commands.md`, `values-minimal.yaml`, `values-prod-example.yaml` |
-| 3 | Prometheus Operator resources | `03-operator-resources/` | `servicemonitor-example.yaml`, `podmonitor-example.yaml`, `prometheusrule-example.yaml` |
-| 4 | Basic exporters | `04-basic-exporters/` | node-exporter, cAdvisor, kube-state-metrics PromQL examples |
-| 5 | Application custom metrics | `05-application-metrics/` | ServiceMonitor, PodMonitor, application PromQL examples |
-| 6 | Special exporters | `06-special-exporters/` | Blackbox, NGINX, NVIDIA DCGM examples |
-| 7 | PromQL examples | `07-promql-basics/` | Kubernetes resource, Pod status, HTTP service, exporter queries |
-| 8 | Grafana dashboards | `08-grafana-dashboard/` | dashboard JSON and provisioning example |
-| 9 | Alertmanager rules and routing | `09-alertmanager/` | Planned |
-| 10 | Long-term storage and remote write | `10-long-term-storage/` | Planned |
+| Part | Blog Topic | Directory | Example Files | Blog |
+|---:|---|---|---|---|
+| 1 | Prometheus monitoring architecture and metrics flow | Concept article | No example files | [Part 1](https://tistory-cloud.tistory.com/entry/Prometheus%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-Kubernetes-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EA%B5%AC%EC%A1%B0%EC%99%80-%EB%A9%94%ED%8A%B8%EB%A6%AD-%EC%88%98%EC%A7%91-%ED%9D%90%EB%A6%84-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0) |
+| 2 | Prometheus Helm install with kube-prometheus-stack | `02-helm-install/` and legacy `helm/` | `install-commands.md`, `values-minimal.yaml`, `values-prod-example.yaml` | [Part 2](https://tistory-cloud.tistory.com/entry/Prometheus-Helm-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95-kube-prometheus-stack%EC%9C%BC%EB%A1%9C-Grafana%EC%99%80-Alertmanager%EA%B9%8C%EC%A7%80-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0) |
+| 3 | Prometheus Operator resources | `03-operator-resources/` | `servicemonitor-example.yaml`, `podmonitor-example.yaml`, `prometheusrule-example.yaml` | [Part 3](https://tistory-cloud.tistory.com/entry/Prometheus%EC%99%80-Prometheus-Operator-%EC%B0%A8%EC%9D%B4-ServiceMonitor-PodMonitor-PrometheusRule-%EC%97%AD%ED%95%A0-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0) |
+| 4 | Basic exporters | `04-basic-exporters/` | node-exporter, cAdvisor, kube-state-metrics PromQL examples | [Part 4](https://tistory-cloud.tistory.com/entry/Prometheus-%EA%B8%B0%EB%B3%B8-%EC%88%98%EC%A7%91%EA%B8%B0-%EC%A0%95%EB%A6%AC-node-exporter-cAdvisor-kube-state-metrics%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%84-%EC%88%98%EC%A7%91%ED%95%A0%EA%B9%8C) |
+| 5 | Application custom metrics | `05-application-metrics/` | ServiceMonitor, PodMonitor, application PromQL examples | [Part 5](https://tistory-cloud.tistory.com/entry/Prometheus-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%A9%94%ED%8A%B8%EB%A6%AD-%EC%88%98%EC%A7%91-%EB%B0%A9%EB%B2%95-ServiceMonitor%EC%99%80-PodMonitor%EB%A1%9C-custom-metrics-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0) |
+| 6 | Special exporters | `06-special-exporters/` | Blackbox, NGINX, NVIDIA DCGM examples | [Part 6](https://tistory-cloud.tistory.com/entry/Prometheus-%ED%8A%B9%EC%88%98-Exporter-%EC%A0%95%EB%A6%AC-NGINX-NVIDIA-DCGM-Blackbox-Exporter%EB%A1%9C-%ED%99%95%EC%9E%A5-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%98%EA%B8%B0) |
+| 7 | PromQL examples | `07-promql-basics/` | Kubernetes resource, Pod status, HTTP service, exporter queries | [Part 7](https://tistory-cloud.tistory.com/entry/PromQL-%EC%82%AC%EC%9A%A9%EB%B2%95-%EA%B8%B0%EC%B4%88-Prometheus-%EB%A9%94%ED%8A%B8%EB%A6%AD%EC%9D%84-%EC%A1%B0%ED%9A%8C%ED%95%98%EA%B3%A0-CPU%C2%B7%EB%A9%94%EB%AA%A8%EB%A6%AC%C2%B7Pod-%EC%83%81%ED%83%9C%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95) |
+| 8 | Grafana dashboards | `08-grafana-dashboard/` | dashboard JSON and provisioning example | [Part 8](https://tistory-cloud.tistory.com/entry/Grafana-%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95-Prometheus-%EB%A9%94%ED%8A%B8%EB%A6%AD%EC%9C%BC%EB%A1%9C-Kubernetes-%EC%9A%B4%EC%98%81-%ED%99%94%EB%A9%B4-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0) |
+| 9 | Alertmanager rules and routing | `09-alertmanager/` | PrometheusRule, AlertmanagerConfig, inhibition, labeling guide | [Part 9](https://tistory-cloud.tistory.com/entry/Prometheus-Alertmanager-%EC%82%AC%EC%9A%A9%EB%B2%95-PrometheusRule%EB%A1%9C-%EC%95%8C%EB%A6%BC-%EC%A1%B0%EA%B1%B4%EA%B3%BC-%EC%9E%A5%EC%95%A0-%EB%8C%80%EC%9D%91-%ED%9D%90%EB%A6%84-%EB%A7%8C%EB%93%A4%EA%B8%B0) |
+| 10 | Long-term storage and remote write | `10-long-term-storage/` | retention values, remote write, relabeling, Thanos sidecar examples | [Part 10](https://tistory-cloud.tistory.com/entry/Prometheus-%EC%9E%A5%EA%B8%B0-%EC%A0%80%EC%9E%A5-%EB%B0%A9%EB%B2%95-Thanos-Remote-Write-%EC%99%B8%EB%B6%80-%EC%A0%80%EC%9E%A5%EC%86%8C%EB%A1%9C-%EB%A9%94%ED%8A%B8%EB%A6%AD-%EB%B3%B4%EA%B4%80%ED%95%98%EA%B8%B0) |
 
 ## Current Scope
 
-The current files support **Part 2 through Part 8** of the Prometheus blog series.
+The current files support **Part 2 through Part 10** of the Prometheus blog series. Part 1 is a concept article without a dedicated example directory.
 
 ```text
 prometheus-kubernetes-monitoring-guide/
