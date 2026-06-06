@@ -1,0 +1,8 @@
+# Pods not running
+kube_pod_status_phase{phase!="Running"}
+
+# Restart increase over 10 minutes
+increase(kube_pod_container_status_restarts_total[10m])
+
+# Deployment unavailable replicas
+kube_deployment_status_replicas_unavailable

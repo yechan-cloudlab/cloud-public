@@ -9,27 +9,31 @@ The examples are designed for learning and review. They are not production-ready
 
 | Part | Blog Topic | Directory | Example Files |
 |---:|---|---|---|
-| 2 | Prometheus Helm install with kube-prometheus-stack | `helm/` | `install-commands.md`, `values-minimal.yaml`, `values-prod-example.yaml` |
-| 3 | Prometheus Operator resources | `operator/` | Planned |
-| 4 | Basic exporters | `exporters-basic/` | Planned |
-| 5 | Application custom metrics | `app-metrics/` | Planned |
-| 6 | Special exporters | `exporters-special/` | Planned |
-| 7 | PromQL examples | `promql/` | Planned |
-| 8 | Grafana dashboards | `grafana/` | Planned |
-| 9 | Alertmanager rules and routing | `alertmanager/` | Planned |
-| 10 | Long-term storage and remote write | `storage/` | Planned |
+| 2 | Prometheus Helm install with kube-prometheus-stack | `02-helm-install/` and legacy `helm/` | `install-commands.md`, `values-minimal.yaml`, `values-prod-example.yaml` |
+| 3 | Prometheus Operator resources | `03-operator-resources/` | `servicemonitor-example.yaml`, `podmonitor-example.yaml`, `prometheusrule-example.yaml` |
+| 4 | Basic exporters | `04-basic-exporters/` | node-exporter, cAdvisor, kube-state-metrics PromQL examples |
+| 5 | Application custom metrics | `05-application-metrics/` | ServiceMonitor, PodMonitor, application PromQL examples |
+| 6 | Special exporters | `06-special-exporters/` | Blackbox, NGINX, NVIDIA DCGM examples |
+| 7 | PromQL examples | `07-promql-basics/` | Kubernetes resource, Pod status, HTTP service, exporter queries |
+| 8 | Grafana dashboards | `08-grafana-dashboard/` | dashboard JSON and provisioning example |
+| 9 | Alertmanager rules and routing | `09-alertmanager/` | Planned |
+| 10 | Long-term storage and remote write | `10-long-term-storage/` | Planned |
 
 ## Current Scope
 
-The current files support **Part 2: Prometheus Helm install**.
+The current files support **Part 2 through Part 8** of the Prometheus blog series.
 
 ```text
 prometheus-kubernetes-monitoring-guide/
 ├─ README.md
-└─ helm/
-   ├─ install-commands.md
-   ├─ values-minimal.yaml
-   └─ values-prod-example.yaml
+├─ helm/                         # legacy path kept for existing blog links
+├─ 02-helm-install/
+├─ 03-operator-resources/
+├─ 04-basic-exporters/
+├─ 05-application-metrics/
+├─ 06-special-exporters/
+├─ 07-promql-basics/
+└─ 08-grafana-dashboard/
 ```
 
 ## What Each File Is For

@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sample-app-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: sample-app.rules
+      rules:
+        - alert: SampleAppTargetDown
+          expr: up{job="sample-app"} == 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Sample app target is down"
+            description: "Prometheus could not scrape sample-app for 5 minutes."

@@ -1,0 +1,8 @@
+# Pods not running
+kube_pod_status_phase{phase!="Running"}
+
+# Container restart increase
+increase(kube_pod_container_status_restarts_total[10m])
+
+# Waiting reasons
+kube_pod_container_status_waiting_reason

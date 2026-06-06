@@ -1,0 +1,27 @@
+# Example kube-prometheus-stack values for production-like review.
+# This is not a production-ready default.
+# Replace passwords, storage class, resource requests, ingress, and alert routing
+# according to your cluster and security requirements.
+
+grafana:
+  enabled: true
+  adminPassword: change-me
+  service:
+    type: ClusterIP
+
+alertmanager:
+  enabled: true
+
+prometheus:
+  prometheusSpec:
+    retention: 15d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
+          # Set this only after checking your cluster storage class.
+          # storageClassName: gp3
