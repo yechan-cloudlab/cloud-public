@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: sample-alert-inhibition
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: sample
+spec:
+  inhibitRules:
+    - sourceMatch:
+        - name: alertname
+          value: NodeDown
+          matchType: =
+      targetMatch:
+        - name: alertname
+          value: PodDown
+          matchType: =
+      equal:
+        - cluster
+        - node
+  route:
+    receiver: default-webhook
+  receivers:
+    - name: default-webhook
+      webhookConfigs:
+        - url: https://webhook.example.com/default-alerts
+          sendResolved: true

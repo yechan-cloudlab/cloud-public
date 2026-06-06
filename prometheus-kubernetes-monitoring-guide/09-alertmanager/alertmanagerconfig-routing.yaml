@@ -1,0 +1,42 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: sample-alert-routing
+  namespace: monitoring
+  labels:
+    alertmanagerConfig: sample
+spec:
+  route:
+    groupBy:
+      - alertname
+      - cluster
+      - namespace
+      - service
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+    receiver: default-webhook
+    routes:
+      - receiver: critical-webhook
+        matchers:
+          - name: severity
+            value: critical
+            matchType: =
+      - receiver: platform-webhook
+        matchers:
+          - name: team
+            value: platform
+            matchType: =
+  receivers:
+    - name: default-webhook
+      webhookConfigs:
+        - url: https://webhook.example.com/default-alerts
+          sendResolved: true
+    - name: critical-webhook
+      webhookConfigs:
+        - url: https://webhook.example.com/critical-alerts
+          sendResolved: true
+    - name: platform-webhook
+      webhookConfigs:
+        - url: https://webhook.example.com/platform-alerts
+          sendResolved: true

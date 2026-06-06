@@ -1,0 +1,36 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sample-service-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: sample-service.rules
+      rules:
+        - alert: SampleServiceHighErrorRate
+          expr: |
+            sum(rate(http_requests_total{status=~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total[5m])) > 0.05
+          for: 10m
+          labels:
+            severity: warning
+            team: platform
+            service: sample-service
+          annotations:
+            summary: "Sample service 5xx error rate is high"
+            description: "5xx error ratio has been over 5% for 10 minutes."
+            runbook_url: "https://example.com/runbooks/sample-service-high-error-rate"
+        - alert: SampleServiceTargetDown
+          expr: up{job="sample-service"} == 0
+          for: 5m
+          labels:
+            severity: critical
+            team: platform
+            service: sample-service
+          annotations:
+            summary: "Sample service target is down"
+            description: "Prometheus could not scrape sample-service for 5 minutes."
+            runbook_url: "https://example.com/runbooks/sample-service-target-down"
