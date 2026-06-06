@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: sample-prometheus
+  namespace: monitoring
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector: {}
+  podMonitorSelector: {}
+  ruleSelector: {}
+  remoteWrite:
+    - url: https://remote-write.example.com/api/v1/write
+      queueConfig:
+        capacity: 10000
+        maxShards: 10
+        maxSamplesPerSend: 1000
+      writeRelabelConfigs:
+        - sourceLabels:
+            - __name__
+          regex: 'go_.*'
+          action: drop

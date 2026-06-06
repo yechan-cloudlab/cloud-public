@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: sample-prometheus
+  namespace: monitoring
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector: {}
+  podMonitorSelector: {}
+  ruleSelector: {}
+  remoteWrite:
+    - url: https://remote-write.example.com/api/v1/write
+      writeRelabelConfigs:
+        - sourceLabels:
+            - namespace
+          regex: 'dev|test'
+          action: drop
+        - sourceLabels:
+            - __name__
+          regex: 'container_.*'
+          action: keep

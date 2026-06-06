@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: thanos-object-storage
+  namespace: monitoring
+type: Opaque
+stringData:
+  objstore.yml: |
+    type: S3
+    config:
+      bucket: example-thanos-bucket
+      endpoint: s3.example-region.amazonaws.com
+      region: example-region
+      # Prefer IAM roles or workload identity in real environments.
+      # Do not commit access keys or secret keys to a public repository.
+      insecure: false
